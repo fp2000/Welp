@@ -1,0 +1,92 @@
+
+a {
+    text-decoration: none;
+    color: gray;
+}
+a:hover {
+    text-decoration: none;
+    color: gray;
+}
+
+.indexPost {
+    margin: 10px;
+    border-radius: 6px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    
+}
+.lightGray {
+    background-color: rgba(240, 240, 240, 0.924);
+}
+.gray {
+    background-color: rgba(212, 212, 212, 0.76);
+}
+
+.indexPostTitle {
+    background-color:rgba(255, 255, 255, 0.931);
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 5px;
+}
+.indexPostTitleLink{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+.indexPostTitleLink:hover{
+    text-decoration: none;
+    color: rgb(117, 135, 136);
+}
+
+.indexPostDetails {
+    padding-top: 0.1em;
+    padding-bottom: 0.5em;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.indexPostText {
+    padding-top: 0.6em;
+    padding-bottom: 0.2em;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 5px;
+    background-color:rgba(255, 255, 255, 0.931);
+}
+.indexPostMedia{
+    text-align: center;
+    padding: 1em;
+}
+.indexPostMediaContent{
+    display: inline-block;
+}
+.indexPostRating {
+    padding-top: 0.1em;
+    padding-bottom: 0.5em;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+body.dark-mode {
+    background-color: $dark-color;
+    color: $light-color;
+    a {
+      color: $dark-color;
+    }
+    button {
+      background-color: $light-color;
+      color: $dark-color;
+    }
+  }
+  
+  body.light-mode {
+    background-color: $light-color;
+    color: $dark-color;
+    a {
+      color: $dark-color;
+    }
+    button {
+      background-color: $dark-color;
+      color: $light-color;
+    }
+  }

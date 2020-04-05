@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="indexPost lightGray">
+        <a class="indexPostTitleLink" href=""><h3 class="indexPostTitle">Titulo 1</h3></a>
+        <div class="indexPostDetails">
+          <div class="row">
+            <div class="col">
+              Author: <a href="">SI</a>
+            </div>
+            <div class="col">
+              Publication Date: 11/09/2001 
+            </div>
+          </div>
+        </div>
+        <div class="indexPostText">
+            <a href=""><h5>Texto ejemplo indice 1</h5></a>
+        </div>
+        <div class="indexPostMedia">
+          <div class="indexPostMediaContent">
+          </div>                
+        </div>
+        <div class="indexPostRating">
+          <div class="row">
+            <div class="col-md-3">
+              <a href="">Like</a>: 999999999
+            </div>
+            <div class="col-md-3">
+              <a href="">Dislike</a>: 11/09/2001 
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="indexPost gray">
+        <a class="indexPostTitleLink" href=""><h3 class="indexPostTitle">Titulo 1</h3></a>
+        <div class="indexPostDetails">
+          <div class="row">
+            <div class="col">
+              Author: <a href="">SI</a>
+            </div>
+            <div class="col">
+              Publication Date: 11/09/2001 
+            </div>
+          </div>
+        </div>
+        <div class="indexPostText">
+            <a href=""><h5>Texto ejemplo indice 1</h5></a>
+        </div>
+        <div class="indexPostMedia">
+          <div class="indexPostMediaContent">
+          </div>                
+        </div>
+        <div class="indexPostRating">
+          <div class="row">
+            <div class="col-md-3">
+              <a href="">Like</a>: 999999999
+            </div>
+            <div class="col-md-3">
+              <a href="">Dislike</a>: 11/09/2001 
+            </div>
+          </div>
+        </div>
+    </div>
+</body>
+</html>
