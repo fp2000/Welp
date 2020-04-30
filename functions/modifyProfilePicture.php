@@ -1,5 +1,7 @@
 <?php
-$url = 'http://localhost:3000/upload';
+
+require_once('serverUrl.php');
+$url = $serverUrl . 'upload';
 
 
 

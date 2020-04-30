@@ -1,7 +1,8 @@
 <?php
-$url = 'http://localhost:3000/user/';
+require_once('serverUrl.php');
+$url = $serverUrl . 'user/';
 
-
+echo $url;
 
 $ch = curl_init($url);
 $userId = uniqid(uwu);
@@ -23,4 +24,4 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $result = curl_exec($ch);
 curl_close($ch);
 
-header("Location: ../profile.php?nickName=$nickName");
+header("Location: ../accountConfirmation.php?nickName=$nickName");

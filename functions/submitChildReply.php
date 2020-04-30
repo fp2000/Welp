@@ -1,11 +1,12 @@
 <?php
-$url = 'http://localhost:3000/reply/child/';
 
+require_once('serverUrl.php');
+$url = $serverUrl . 'reply/child/';
 
 $ch = curl_init($url);
 
 $postId = $_POST['postId'];
-$childReplyId = uniqid(CR);
+$childReplyId = uniqid('cr');
 echo 'submiting your reply with id: ' . $childReplyId;
 $data = array(
     'text'          => $_POST['text'],
@@ -23,4 +24,4 @@ $result = curl_exec($ch);
 curl_close($ch);
 
 
-//header("Location: ../singlePost.php?postId=$postId");
+header("Location: ../singlePost.php?postId=$postId");

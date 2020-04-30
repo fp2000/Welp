@@ -1,5 +1,3 @@
-const serverUrl = 'http://localhost:3000'; 
-
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const postId = urlParams.get('postId');
@@ -21,7 +19,12 @@ fetch(serverUrl + '/post/'+ postId).then(function (response) {
         
 });
 
-fetch(serverUrl + '/post/visit/'+ postId);
+setTimeout(function () {
+    fetch(serverUrl + '/post/visit/'+ postId);
+}, 5000);
+
+
+
 
 fetch(serverUrl + '/replys/postId/'+ postId).then(function (response) {
     return response.json();

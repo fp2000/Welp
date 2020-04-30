@@ -1,6 +1,7 @@
 <?php
-$url = 'http://localhost:3000/post/';
 
+require_once('serverUrl.php');
+$url = $serverUrl . 'post/';
 
 
 $ch = curl_init($url);

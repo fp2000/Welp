@@ -1,4 +1,3 @@
-
 fetch(serverUrl + '/posts/recommended/').then(function (response) {
     return response.json();
 }).then (function(posts){

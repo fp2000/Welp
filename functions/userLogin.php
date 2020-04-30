@@ -1,6 +1,9 @@
 <?php
 session_start();
-$url = "http://localhost:3000/auth";
+
+require_once('serverUrl.php');
+$url = $serverUrl . 'auth';
+
 $pass =  crypt($_POST['password'], '$6$');
 $nickName = $_POST['nickName'];
 $currentUrl = $_POST['currentUrl'];
@@ -39,6 +42,8 @@ if ($userParams->nickName == $nickName){
     $_SESSION["nickName"]=$userParams->nickName;
     $_SESSION["firstName"]=$userParams->firstName;
     $_SESSION["userId"]=$userParams->userId;
+    $_SESSION["userId"]=$userParams->userId;
+    $_SESSION["status"]=$userParams->status;
     header('Location: ' . $currentUrl);
     
 } elseif ($res == 'incorrectPassword'){

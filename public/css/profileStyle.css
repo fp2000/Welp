@@ -1,6 +1,19 @@
-.profilePictureDiv {
-    
-}
+
 #profilePicture {
     width: 10em;
+    border-radius: 100%;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+.mainBackground {
+    background-color:rgba(255, 255, 255, 0.931);
+    margin: 10px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+#profilePictureDiv {
+    border-radius: 100%;
 }

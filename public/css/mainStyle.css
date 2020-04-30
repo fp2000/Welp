@@ -11,15 +11,14 @@ body.light-mode {
     color: rgb(0, 0, 0);
 
 }
+
+
 .customNavBar {
     background-color: #B0B7C0;
 }
 
 .mainBorder {
     border-radius: 6px;
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
 }
 a {
     text-decoration: none;
@@ -27,15 +26,12 @@ a {
 }
 a:hover {
     text-decoration: none;
-    color: black;;
+    color: black;
 }
 
 .indexPost {
     margin: 10px;
     border-radius: 6px;
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
     
 }
 .lightGray {
@@ -126,3 +122,4 @@ a:hover {
     padding-left: 1em;
     padding-right: 1em;
 }
+

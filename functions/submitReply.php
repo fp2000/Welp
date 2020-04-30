@@ -1,7 +1,7 @@
 <?php
-$url = 'http://localhost:3000/reply/';
 
-
+require_once('serverUrl.php');
+$url = $serverUrl . 'reply/';
 
 $ch = curl_init($url);
 $postId = $_POST['postId'];
