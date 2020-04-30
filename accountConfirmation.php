@@ -5,18 +5,42 @@
   <link rel="stylesheet" type="text/css" href="public/css/mainStyle.css">
   <link rel="stylesheet" type="text/css" href="public/css/toggleSwitch.css">
   <link rel="stylesheet" type="text/css" href="public/css/singlePost.css">
+  <link rel="stylesheet" type="text/css" href="public/css/accountConfirmationStyle.css">  
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
   <title>Please, confirm your account</title>
 </head>
 
 <body>
 <html>
-    <h1>Please, confirm your account</h1>
-    <br>
-    <a>Send again the confirmation email</a>
-    <br>
-    <a href="functions/logOut.php">Log out and back to home</a>
-    <br>
+
+    <div class="container">
+      <div class="bgBlack">
+        <div class="bgWhite">
+          <div class="row">
+            <div class="col-md-12">
+              <h1>Please, confirm your account</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p>An email have been sent to your email. Activate your account before use it</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <a>Send again the confirmation email</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <br>
+              <a href="functions/logOut.php">Log out and back to home</a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
 
 </html>
 

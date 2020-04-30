@@ -9,12 +9,13 @@ $userId = uniqid(uwu);
 $nickName = $_POST['nickName'];
 $pass =  crypt($_POST['password1'], '$6$');
 $data = array(
-    'firstName' => $_POST['firstName'],
-    'lastName' => $_POST['lastName'],
-    'nickName' => $nickName,
-    'birthDate' => $_POST['birthDate'],
-    'userId' => $userId,
-    'password' => $pass,
+    'firstName'     => $_POST['firstName'],
+    'lastName'      => $_POST['lastName'],
+    'nickName'      => $nickName,
+    'birthDate'     => $_POST['birthDate'],
+    'userId'        => $userId,
+    'password'      => $pass,
+    'email'         => $_POST['email'],
 );
 $payload = json_encode($data);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);

@@ -203,7 +203,7 @@ session_start();
                 
                 <input type="hidden" id="nickName" name="nickName" value="<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>">
                 <input type="hidden" id="userId" name="userId" value="<?php echo isset($_SESSION['userId']) ? $_SESSION['userId'] : "undefined" ?>">
-                <input type="hidden" id="postId" name="postId" value="<?php echo isset($_SESSION['postId']) ? $_SESSION['postId'] : "undefined" ?>">
+                <input type="hidden" id="postId" name="postId" value="<?php echo $_GET['postId']; ?>">
                 <input type="hidden" name="replyId" value="${replyId}">
                 <button type="submit" id="sbmt${replyId}" class="btn btn-primary button1" value="OK">Submit your reply</button>
               </form>

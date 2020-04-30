@@ -1,0 +1,9 @@
+.bgBlack {
+    margin-top: 10em;
+    background-color: gray;
+    padding: 0.2em;
+}
+.bgWhite {
+    background-color: white;
+    padding: 2em;
+}

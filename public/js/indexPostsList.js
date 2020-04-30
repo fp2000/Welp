@@ -54,7 +54,7 @@ function addContent(positions) {
                 <div class="indexPostDetails">
                   <div class="row">
                     <div class="col">
-                      Author: ${lastPosition}<a href="profile.php?nickName=${posts[i].author}">${posts[i].author}</a>
+                      Author: <a href="profile.php?nickName=${posts[i].author}">${posts[i].author}</a>
                     </div>
                     <div class="col">
                       Publication Date:${posts[i].creationDate}

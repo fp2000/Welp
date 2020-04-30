@@ -6,10 +6,9 @@ if (isset($_SESSION["status"])){
   if ($_SESSION["status"] == "active") {
   }
   else if (($_SESSION["status"] == "pending")){
-    echo "pending";
+    header("Location: accountConfirmation.php");
   } else {
-    $nickName = $_SESSION['status'];
-    header("Location: ../accountConfirmation.php?nickName=$nickName");
+    echo $_SESSION["status"];
   }
 }
 
@@ -22,7 +21,7 @@ if (isset($_SESSION["status"])){
     <link id="link" rel="stylesheet" type="text/css" href="public/css/mainStyle.css">
     <link id="link" rel="stylesheet" type="text/css" href="public/css/toggleSwitch.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <title>Inicio</title>
+    <title>Welp: Inicio</title>
 </head>
 
 <body class="light-mode" id="body">
@@ -72,12 +71,13 @@ if (isset($_SESSION["status"])){
 
 <!-- Create post button -->
 
-    <div class="row m-3">
+    <div class="row mt-3 mb-3">
       <div class="col-md-12 d-none" id="createPostDiv">
         <a id="btnCreatePost" href="createPost.php" class="btn btn-success button1">Create post</a>
       </div>
-      <div class="col-md-12 notCreatePostDiv" id="notCreatePostDiv">        
-          <div class="notCreatePostDivText">
+      
+      <div class="col-md-12 ml-1" id="notCreatePostDiv">        
+          <div class="notCreatePostDivText notCreatePostDiv">
             If you want to create a post or give an opinion <a onclick="$('#login').modal('show')">Login</a> or <a href="registration.html">create an account</a>
           </div>
       </div>
@@ -85,29 +85,27 @@ if (isset($_SESSION["status"])){
 
 <!--End create post button -->
 
+
     <div class="row">
-
 <!--Index Posts-->
-
-      <div class="col-md-8">     
+      <div class="col-md-8">
         <div id="posts">
           <div id="placeHolder"></div>
         </div>
-      </div>
-      
+      </div>      
 <!--End index posts-->
 
 <!-- Recommended posts area --> 
-
-      <div class="recommendedPosts mainBorder">
-        <h5 class="pt-1">Recommended Posts</h5>
-        <div id="recommendedPostsPlaceHolder">
-        </div>
+      <div class="col-md-4 recommendedPosts mainBorder">
+        <h5 class="">Recommended Posts</h5>
+        <div id="recommendedPostsPlaceHolder"></div>
       </div>
-
 <!-- End Recommended posts area --> 
 
     </div>
+
+
+
 </div>
 
 
