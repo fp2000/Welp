@@ -49,10 +49,8 @@ session_start();
 
 
   <div class="container">
-
-    <div class="row">
-
-
+    
+  <div class="row">
       <div class="col-md-4">
 
 <!-- Profile details -->
@@ -84,8 +82,7 @@ session_start();
         </div>
 <!--End Profile details -->
 
-      </div>
-  
+      </div>  
 
 <!-- User Profile posts -->
       <div class="col-md-8">
@@ -117,8 +114,10 @@ session_start();
 </script>
 <?php
   if (isset($_SESSION["nickName"])){
-    echo '<script>hideMenus();</script>';
-    echo '<script>showModifyUserMenu();</script>';
+    if ($_SESSION["nickName"] == $_GET['nickName']){
+      echo '<script>hideMenus();</script>';
+      echo '<script>showModifyUserMenu();</script>';
+    }
   }
 ?>
 </html>

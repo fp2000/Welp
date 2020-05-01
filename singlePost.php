@@ -171,24 +171,67 @@ session_start();
     </div>
   </div>
 
+<!--Login Modal-->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
 
+                <form action="functions/userLogin.php" method="POST" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <input id="modalLogInNickName" class="form-control" type="text" name="nickName" placeholder="Username" required>
+                    <br>
+                    <input id="modalLogInPassword" class="form-control" type="password" name="password" placeholder="Password" required>
+                    <br>
+                    <input type="hidden" id="currentUrl" name="currentUrl" value=CurrentUrl>
+
+                    <button type="submit" id="modalLogInBtn" class="btn btn-primary button1" >Log In</button>
+                    
+                  </div>
+                  
+                </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-center modalBottom">
+              <p>Don't have an account? Create yours <a href="registration.html">here</a>!</p>
+            </div>
+          </div>
+        </div>
+    </div>
+<!--End Login Modal-->
 
 
 
 
 
 </body>
+<script>
+  function replyAction(replyId) {
+    if (<?php echo isset($_SESSION["nickName"]) ? "true" : "false";?>){
+      showReplyBox(replyId);
+    } else {
+      $('#login').modal('show');
+    }
+  }
+</script>
 <script src="public/js/serverUrl.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="public/js/singlePost.js"></script>
 <script src="public/js/darkMode.js"></script>
-<script src="public/js/changeMenu.js"></script>
 <script src="public/js/recommendedPosts.js"></script>
+<script src="public/js/changeMenu.js"></script>
 
 <script>
   //document.getElementById("currentUrl").value = window.location.href;
+
+
 
   function showReplyBox(replyId) {
     text = `

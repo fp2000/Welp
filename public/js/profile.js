@@ -5,7 +5,7 @@ const nickName = urlParams.get('nickName');
 fetch(serverUrl + '/user/'+ nickName).then(function (response) {
     return response.json();        
 }).then (function(user){
-    $("#profilePicture").attr("src", `http://localhost:3000/uploads/${user.nickName}.jpg`);
+    $("#profilePicture").attr("src", serverUrl + `/uploads/${user.nickName}.jpg`);
     $("#profileNickName").text(user.nickName);
     $("#profileName").text(user.firstName);
     $("#profileLastName").text(user.lastName);
@@ -31,3 +31,7 @@ fetch(serverUrl + '/posts/author/' + nickName).then(function (response) {
     };
     document.getElementById('postsPlaceHolder').innerHTML = text;
 });
+
+function showModifyUserMenu() {
+    $("#userModificationButton").removeClass("d-none");
+}

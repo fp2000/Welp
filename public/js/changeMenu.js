@@ -10,7 +10,3 @@ function showCommentBoxSinglePost() {
     $("#notCreateCommentArea").addClass("d-none");
     $("#commentArea").removeClass("d-none");
 }
-
-function showModifyUserMenu() {
-    $("#userModificationButton").removeClass("d-none");
-}

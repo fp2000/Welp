@@ -36,6 +36,7 @@ fetch(serverUrl + '/replys/postId/'+ postId).then(function (response) {
     for (i = 0; i < replys.length; i++) {
         let text = `
                 <div class="singleReply" id="r${replys[i].replyId}">
+                <hr>
                     <div class="row">
                         <div class="col-md-4">
                             Author:  ${replys[i].nickName}
@@ -45,8 +46,8 @@ fetch(serverUrl + '/replys/postId/'+ postId).then(function (response) {
                         <div class="col-md-4">
                             ${replys[i].text}
                         </div>
-                        <div class="col-md-2">
-                            <button type="button" id="bt${replys[i].replyId}" onclick="showReplyBox('${replys[i].replyId}')"> Send reply </button>              
+                        <div class="col-md-3 replyButton">
+                            <button type="button" id="bt${replys[i].replyId}" class="btn btn-success button1" onclick="replyAction('${replys[i].replyId}')"> Send reply </button>              
                         </div>
                     </div>`;
                 for (j = 0; j < replys[i].replys.length; j++) {
