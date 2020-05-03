@@ -59,15 +59,15 @@ if (!isset($_SESSION["nickName"]) && !isset($_SESSION["userId"])){
                 <div class="row mt-4">
                     <div class="col-md-7">
                         <div class="form-group">
-                        <label for="title">Post Title</label>
-                        <input id="titleTxtPostForm" type="text" name="title" class="form-control" id="title">          
+                        <label for="title">Post Title </label>
+                        <input id="titleTxtPostForm" type="text" name="title" class="form-control" id="title" required>          
                         </div>
                     </div>
 
                     <div class="col-md-5">
                         <label for="topic">Please, select a topic</label>
                         <div class="form-group">
-                            <select class="form-control" id="topic" name="topic">
+                            <select class="form-control" id="topic" name="topic" required>
                             </select>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ if (!isset($_SESSION["nickName"]) && !isset($_SESSION["userId"])){
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="text">Text</label>
-                            <textarea id="textTxtPostForm" class="form-control" id="text" name="text" rows="3"></textarea>
+                            <textarea id="textTxtPostForm" class="form-control" id="text" name="text" rows="3" required></textarea>
                         </div>
                     </div>
                 </div>

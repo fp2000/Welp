@@ -122,3 +122,6 @@ a:hover {
     padding-right: 1em;
 }
 
+#error {
+    color: red;
+}

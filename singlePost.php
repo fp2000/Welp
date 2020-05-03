@@ -103,7 +103,7 @@ session_start();
                 <div class="col-md-12">
                   <form action="./functions/submitReply.php" method="POST">
                     <div class="form-group">
-                      <textarea class="form-control" id="replyTextBox" name="text" rows="3"></textarea>
+                      <textarea class="form-control" id="replyTextBox" name="text" rows="3" required></textarea>
                     </div>
                     <input type="hidden" id="nickName" name="nickName" value="<?php echo $_SESSION["nickName"]; ?>">
                     <input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["userId"]; ?>">
@@ -241,7 +241,7 @@ session_start();
             <div class="col-md-10">
               <form action="./functions/submitChildReply.php" method="POST">
                 <div class="form-group">
-                  <textarea id="txtA${replyId}" class="form-control" id="text" name="text" rows="3"></textarea>
+                  <textarea id="txtA${replyId}" class="form-control" id="text" name="text" rows="3" required></textarea>
                 </div>
                 
                 <input type="hidden" id="nickName" name="nickName" value="<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>">

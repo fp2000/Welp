@@ -1,7 +1,18 @@
 <?php
 require_once('serverUrl.php');
-$url = $serverUrl . 'user/';
 
+if (isset($_POST['firstName']) && isset($_POST['lastName']) && 
+    isset($_POST['nickName']) && isset($_POST['password1']) && 
+    isset($_POST['password2']) && isset($_POST['email']) && 
+    isset($_POST['birthDate'])) {
+    if (strcmp($_POST['password1'], $_POST['password2']) !== 0) {
+        exit("data validation error"); 
+    }
+} else {
+    exit("data validation error"); 
+}
+
+$url = $serverUrl . 'user/';
 echo $url;
 
 $ch = curl_init($url);

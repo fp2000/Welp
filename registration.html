@@ -58,28 +58,28 @@
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="firstName">Your Name</label>
-                            <input type="text" name="firstName" class="form-control" id="firstName">
+                            <label for="firstName">Your Name (required)</label>
+                            <input type="text" name="firstName" class="form-control" id="firstName" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" name="lastName" class="form-control" id="lastName">          
+                            <label for="lastName">Last Name (required)</label>
+                            <input type="text" name="lastName" class="form-control" id="lastName" required>          
                             </div>
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="nickName">Pick an Username</label>
-                            <input type="text" name="nickName" class="form-control" id="nickName">
+                            <label for="nickName">Pick an Username (required)</label>
+                            <input type="text" name="nickName" class="form-control" id="nickName" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="email">Introduce your email</label>
-                            <input type="email" name="email" class="form-control" id="email">
+                            <label for="email">Introduce your email (required)</label>
+                            <input type="email" name="email" class="form-control" id="email" required>
                             </div>
                         </div>
                     </div>
@@ -88,10 +88,10 @@
                             <div class="input-group">
                                 <div class="row">
                                     <div class="col-md-7">
-                                        <label for="birthDate">Introduce your Birth Date</label>
+                                        <label for="birthDate">Introduce your Birth Date (required)</label>
                                     </div>
                                     <div class="col-md-5">
-                                        <input type="date" id="birthDate" name="birthDate">
+                                        <input type="date" id="birthDate" name="birthDate" required>
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="password1">Create a password</label>
-                                <input type="password" name="password1" class="form-control" id="password1">
+                                <input type="password" name="password1" class="form-control" id="password1" required>
                             </div>
                         </div>                        
                     </div>
@@ -109,24 +109,22 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="password2">Please, confirm your password</label>
-                                <input type="password" name="password2" class="form-control" id="password2">
+                                <input onchange="verify()" type="password" name="password2" class="form-control" id="password2" required>
+                                <span id="error"></span>
                             </div>
                         </div>
                     </div>
-                    <input type="file" name="profilePicture" id="profilePicture" >
-                    
                     <div>
                         <button type="submit" class="btn btn-primary button1" value="OK">Create an account</button>
                     </div>
                 </form>
             </div>
-        </div>
-
-     
+        </div>     
     </div>
 
     
 </body>
+<script src="public/js/passwordValidator.js"></script>
 <script src="public/js/serverUrl.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -1,8 +1,17 @@
 <?php
 
 require_once('serverUrl.php');
-$url = $serverUrl . 'reply/child/';
 
+if (isset($_POST['text']) && isset($_POST['nickName']) && 
+    isset($_POST['postId']) && isset($_POST['replyId'])) {
+} else {
+    exit("data validation error"); 
+}
+
+
+
+
+$url = $serverUrl . 'reply/child/';
 $ch = curl_init($url);
 
 $postId = $_POST['postId'];

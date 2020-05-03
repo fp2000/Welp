@@ -1,6 +1,13 @@
 <?php
-
 require_once('serverUrl.php');
+
+if (isset($_POST['text']) && isset($_POST['postId']) && 
+    isset($_POST['nickName'])) {
+} else {
+    exit("data validation error"); 
+}
+
+
 $url = $serverUrl . 'reply/';
 
 $ch = curl_init($url);
@@ -12,7 +19,6 @@ $data = array(
     'nickName'   => $_POST['nickName'],
     'replyId'    => $replyId,
     'postId'     => $postId,
-    'nickName'   => $_POST['nickName'],
     'reply'      => array()
 );
 print_r($data);
