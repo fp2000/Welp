@@ -75,9 +75,13 @@ session_start();
                 </div>
                 <div class="singlePostText" id="text"></div>
                 <div class="singlePostMedia">
-                  <div class="singlePostMediaContent"></div>
+                  <div class="singlePostMediaContent">
+                    <div id="content"></div>
+                  </div>                  
                 </div>
-              </div>
+                <span class="modifyPostButton" id="modifyPostButton"></span>
+                <span class="deletePostButton" id="deletePostButton"></span>
+              </div>              
             </div>
           </div>
         </div>
@@ -205,6 +209,74 @@ session_start();
     </div>
 <!--End Login Modal-->
 
+<!-- Edit post modal -->
+    <div class="modal fade" id="editPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modify Post</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="functions/modifyPost.php" method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                      <label for="title">Post Title </label>
+                      <input type="text" name="modifyPostTitle" class="form-control" id="modifyPostTitle" required>          
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="text">Text</label>
+                          <textarea class="form-control" id="modifyPostText" name="modifyPostText" rows="3" required></textarea>
+                      </div>
+                  </div>
+              </div>
+              <div class="row" id="modifyPostContentModal"></div>
+
+              <input type="hidden" id="modifyPostAuthor" name="postAuthor">
+              <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
+              <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+<!--End Edit post modal -->
+
+<!-- Delete post confirmation -->
+    <div class="modal fade" id="deletePostConfirmation" tabindex="-1" role="dialog"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          
+          <div class="modal-body">
+            Are you sure you want to delete this post?
+          </div>
+          <div class="modal-footer">
+            <form action="functions/deletePost.php" method="POST" enctype="multipart/form-data">     
+              <input type="hidden" id="deletePostAuthor" name="deletePostAuthor">
+              <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
+              <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+              <button type="submit" class="btn btn-danger">Delete Post</button>
+            </form>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--End Delete post confirmation -->
+
 
 
 
@@ -218,6 +290,7 @@ session_start();
       $('#login').modal('show');
     }
   }
+  var currentUser = "<?php echo $_SESSION["nickName"];?>";
 </script>
 <script src="public/js/serverUrl.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

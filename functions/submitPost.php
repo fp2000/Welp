@@ -15,9 +15,9 @@ $postId = uniqid(uwu);
 
 echo 'submiting your post with id: ' . $postId;
 
-$media = "";
+$content = "";
 if (isset($_POST['content'])){
-    $media = $_POST['content'];
+    $content = $_POST['content'];
 }
 
 $data = array(
@@ -27,7 +27,7 @@ $data = array(
     'userId'    => $_POST['userId'],
     'topic'     => $_POST['topic'],
     'postId'    => $postId,
-    'media'     => $media,
+    'content'     => $content,
     'likes'     => array()
 );
 $ch = curl_init($url);

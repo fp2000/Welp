@@ -113,9 +113,9 @@ session_start();
 
 </script>
 <?php
-  if (isset($_SESSION["nickName"])){
+  if (isset($_SESSION["nickName"])){    
+    echo '<script>hideMenus();</script>';
     if ($_SESSION["nickName"] == $_GET['nickName']){
-      echo '<script>hideMenus();</script>';
       echo '<script>showModifyUserMenu();</script>';
     }
   }

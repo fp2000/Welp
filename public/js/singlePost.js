@@ -2,6 +2,13 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const postId = urlParams.get('postId');
 
+var modifyContentModal = `
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="content">Enter your video url here</label>
+            <textarea class="form-control" id="modifyPostContent" name="modifyPostContent" rows="3"></textarea>
+        </div>
+    </div>`
 
 
 
@@ -16,15 +23,28 @@ fetch(serverUrl + '/post/'+ postId).then(function (response) {
         document.getElementById('likes').innerHTML= post.likes;
         document.getElementById('visits').innerHTML= post.visits;
         document.getElementById('topic').innerHTML= post.topic;
-        
+        if (post.content != undefined){
+            document.getElementById('content').innerHTML= post.content;        
+            document.getElementById('modifyPostContentModal').innerHTML= modifyContentModal;
+        }        
+        if (currentUser === post.author) {
+            $('#modifyPostButton').html('<button type="button" id="navLogInBtn" class="btn btn-primary button1" data-toggle="modal" data-target="#editPost">Edit</button>');
+            $('#deletePostButton').html('<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePostConfirmation">Delete post</button>');
+
+            document.getElementById("modifyPostAuthor").value=post.author;
+            document.getElementById("deletePostAuthor").value=post.author;
+            document.getElementById("modifyPostTitle").value=post.title;
+            document.getElementById("modifyPostText").value=post.text;
+            document.getElementById("modifyPostContent").value=post.content;
+        }
+
 });
 
 setTimeout(function () {
     fetch(serverUrl + '/post/visit/'+ postId);
 }, 5000);
 
-
-
+   
 
 fetch(serverUrl + '/replys/postId/'+ postId).then(function (response) {
     return response.json();

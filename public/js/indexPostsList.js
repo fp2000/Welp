@@ -64,7 +64,7 @@ function addContent(positions) {
                 <div class="indexPostText">
                     <a href="singlePost.php?postId=${postId}"><p>${posts[i].text}</p></a>
                 </div>`
-                if (!posts[i].content === undefined) {
+                if (posts[i].content != undefined) {
                   text+= `
                   <div class="indexPostMedia">
                     <div class="indexPostMediaContent">
