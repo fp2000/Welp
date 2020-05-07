@@ -11,7 +11,7 @@ if (isset($_POST['title']) && isset($_POST['text']) &&
 
 $url = $serverUrl . 'post/';
 
-$postId = uniqid(uwu);
+$postId = uniqid('uwu');
 
 echo 'submiting your post with id: ' . $postId;
 

@@ -8,7 +8,7 @@ var modifyContentModal = `
             <label for="content">Enter your video url here</label>
             <textarea class="form-control" id="modifyPostContent" name="modifyPostContent" rows="3"></textarea>
         </div>
-    </div>`
+    </div>`;
 
 
 
@@ -16,8 +16,9 @@ fetch(serverUrl + '/post/'+ postId).then(function (response) {
         return response.json();        
     }).then (function(post){
         document.title = post.title;
+        var postDate = new Date(post.creationDate).toLocaleString();
         document.getElementById('singlePostTitle').innerHTML= post.title;
-        document.getElementById('publishDate').innerHTML= post.creationDate;
+        document.getElementById('publishDate').innerHTML= postDate;
         document.getElementById('author').innerHTML= `<a href="profile.php?nickName=${post.author}">${post.author}</a>`;
         document.getElementById('text').innerHTML= post.text;
         document.getElementById('likes').innerHTML= post.likes;
@@ -54,40 +55,88 @@ fetch(serverUrl + '/replys/postId/'+ postId).then(function (response) {
 
 
     for (i = 0; i < replys.length; i++) {
+        var date = new Date(replys[i].date).toLocaleString();
         let text = `
                 <div class="singleReply" id="r${replys[i].replyId}">
                 <hr>
                     <div class="row">
-                        <div class="col-md-4">
-                            Author:  ${replys[i].nickName}
-                            <br>
-                            Date: ${replys[i].date}
-                        </div>
-                        <div class="col-md-4">
-                            ${replys[i].text}
-                        </div>
-                        <div class="col-md-3 replyButton">
-                            <button type="button" id="bt${replys[i].replyId}" class="btn btn-success button1" onclick="replyAction('${replys[i].replyId}')"> Send reply </button>              
-                        </div>
-                    </div>`;
-                for (j = 0; j < replys[i].replys.length; j++) {
-                    text+= `
-                        <div class="replyReply">
+                        <div class="col-md-6">
                             <div class="row">
-                                <div class="col-md-1">
+                                <div class="col-md-12">
+                                    Author:  ${replys[i].nickName} Date: ${date}
                                 </div>
-                                <div class="col-md-9">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    ${replys[i].text}
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-7"></div>
+                                <div class="col-md-5" replyButton">
+                                    <button type="button" id="bt${replys[i].replyId}" class="btn btn-success button1" onclick="replyAction('${replys[i].replyId}')"> Send reply </button>
+                                </div>
+                            </div>
+                            <br>`
+                if (currentUser === replys[i].nickName) {
+                    text+= `
+                            <div class="row">                            
+                                <div class="col-md-7">                                    
+                                </div>
+                                <div class="col-md-2 replyButton">
+                                    <button type="button" class="btn btn-success button1" data-toggle="modal" data-target="#modifyReplyModal" onclick="fillModifyReplyFormulary('${replys[i].replyId}', '${replys[i].text}', '${replys[i].nickName}')">
+                                        <i class="material-icons">edit</i></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-2 replyButton">
+                                    <button type="button" class="btn btn-success button1" data-toggle="modal" data-target="#deleteReplyConfirmation" onclick="fillDeleteReplyConfirmation('${replys[i].replyId}', '${replys[i].nickName}')" >
+                                        <i class="material-icons">delete</i></i>
+                                    </button>
+                                </div>
+                            </div>`
+                }
+                text += `
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    `;
+                for (j = 0; j < replys[i].replys.length; j++) {
+                    var date = new Date(replys[i].replys[j].date).toLocaleString();
+                    text+= `
+                        <div class="replyReply mt-1">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-7">
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            Author: ${replys[i].replys[j].nickName}
-                                            <br>
-                                            Date: ${replys[i].replys[j].date}
-                                        </div>
-                                        <div class="col-md-6">
-                                            ${replys[i].replys[j].text}
-                                        </div>
+                                        <div class="col-md-12"> Author: ${replys[i].replys[j].nickName} Date: ${date} </div>
                                     </div>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-md-12"> ${replys[i].replys[j].text} </div>
+                                    </div>
+                                </div>`
+                                if (currentUser === replys[i].replys[j].nickName) {
+                                    text+= `
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-md-3 replyButton">
+                                                        <button type="button" class="btn btn-success button1" data-toggle="modal" data-target="#modifyChildReplyModal" onclick="fillModifyChildReplyFormulary('${replys[i].replyId}', '${replys[i].replys[j].text}', '${replys[i].replys[j].nickName}', '${replys[i].replys[j].childReplyId}')">
+                                                            <i class="material-icons">edit</i></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-3 replyButton">
+                                                        <button type="button" class="btn btn-success button1" data-toggle="modal" data-target="#deleteChildReplyConfirmation" onclick="fillDeleteChildReplyConfirmation('${replys[i].replyId}', '${replys[i].replys[j].nickName}', '${replys[i].replys[j].childReplyId}')" >
+                                                            <i class="material-icons">delete</i></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>`
+                                }
+                                text += `
                             </div>
                         </div>
                         `;
@@ -98,3 +147,26 @@ fetch(serverUrl + '/replys/postId/'+ postId).then(function (response) {
     }      
   });
 
+  function fillModifyReplyFormulary(replyId, replyText, nickName) {
+    document.getElementById("modifyReplyText").value=replyText;
+    document.getElementById("modifyReplyId").value=replyId;
+    document.getElementById("modifyReplyAuthor").value=nickName;
+}
+
+function fillDeleteReplyConfirmation(replyId, nickName) {
+    document.getElementById("deleteReplyId").value=replyId;
+    document.getElementById("deleteReplyAuthor").value=nickName;
+}
+
+function fillModifyChildReplyFormulary(replyId, replyText, nickName, childReplyId) {
+    document.getElementById("modifyChildReplyText").value=replyText;
+    document.getElementById("modifyChildReplyId").value=replyId;
+    document.getElementById("modifyChildReplyAuthor").value=nickName;
+    document.getElementById("modifyChildReplyChildReplyId").value=childReplyId;
+}
+
+function fillDeleteChildReplyConfirmation(replyId, nickName, childReplyId) {
+    document.getElementById("deleteChildReplyId").value=replyId;
+    document.getElementById("deleteChildReplyAuthor").value=nickName;
+    document.getElementById("deleteChildReplyChildReplyId").value=childReplyId;
+}

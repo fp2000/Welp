@@ -12,6 +12,7 @@ session_start();
   <link rel="stylesheet" type="text/css" href="public/css/toggleSwitch.css">
   <link rel="stylesheet" type="text/css" href="public/css/singlePost.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title>Single Post</title>
 </head>
 
@@ -277,6 +278,124 @@ session_start();
     </div>
 <!--End Delete post confirmation -->
 
+<!-- Modify reply modal -->
+<div class="modal fade" id="modifyReplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <form action="functions/modifyReply.php" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label for="text">Text</label>
+                      <textarea class="form-control" id="modifyReplyText" name="modifyReplyText" rows="3" required></textarea>
+                  </div>
+              </div>
+          </div>
+          <input type="hidden" id="modifyReplyId" name="modifyReplyId">
+          <input type="hidden" id="modifyReplyAuthor" name="modifyReplyAuthor">
+          <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
+          <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<!-- End modify reply modal -->
+
+<!-- Delete reply confirmation -->
+  <div class="modal fade" id="deleteReplyConfirmation" tabindex="-1" role="dialog"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-body">
+          Are you sure you want to delete this reply?
+        </div>
+        <div class="modal-footer">
+          <form action="functions/deleteReply.php" method="POST" enctype="multipart/form-data">     
+
+            <input type="hidden" id="deleteReplyId" name="deleteReplyId">
+            <input type="hidden" id="deleteReplyAuthor" name="deleteReplyAuthor">
+            <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
+            <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+
+            <button type="submit" class="btn btn-danger">Delete Reply</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- End Delete reply confirmation -->
+
+
+<!-- Modify ChildReply modal -->
+<div class="modal fade" id="modifyChildReplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <form action="functions/modifyChildReply.php" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label for="text">Text</label>
+                      <textarea class="form-control" id="modifyChildReplyText" name="modifyChildReplyText" rows="3" required></textarea>
+                  </div>
+              </div>
+          </div>
+          <input type="hidden" id="modifyChildReplyId" name="modifyChildReplyId">
+          <input type="hidden" id="modifyChildReplyAuthor" name="modifyChildReplyAuthor">
+          <input type="hidden" id="modifyChildReplyChildReplyId" name="modifyChildReplyChildReplyId">
+          <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
+          <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<!-- End modify ChildReply modal -->
+
+<!-- Delete ChildReply confirmation -->
+  <div class="modal fade" id="deleteChildReplyConfirmation" tabindex="-1" role="dialog"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-body">
+          Are you sure you want to delete this reply?
+        </div>
+        <div class="modal-footer">
+          <form action="functions/deleteChildReply.php" method="POST" enctype="multipart/form-data">     
+
+          <input type="hidden" id="deleteChildReplyId" name="deleteChildReplyId">
+          <input type="hidden" id="deleteChildReplyAuthor" name="deleteChildReplyAuthor">
+          <input type="hidden" id="deleteChildReplyChildReplyId" name="deleteChildReplyChildReplyId">
+          <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">          
+          <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+
+            <button type="submit" class="btn btn-danger">Delete Reply</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- End Delete ChildReply confirmation -->
+
 
 
 
@@ -291,6 +410,7 @@ session_start();
     }
   }
   var currentUser = "<?php echo $_SESSION["nickName"];?>";
+
 </script>
 <script src="public/js/serverUrl.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

@@ -12,7 +12,7 @@ $url = $serverUrl . 'reply/';
 
 $ch = curl_init($url);
 $postId = $_POST['postId'];
-$replyId = uniqid(uwuR);
+$replyId = uniqid('uwuR');
 echo 'submiting your reply with id: ' . $replyId;
 $data = array(
     'text'       => $_POST['text'],
