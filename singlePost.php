@@ -241,7 +241,6 @@ session_start();
               <div class="row" id="modifyPostContentModal"></div>
 
               <input type="hidden" id="modifyPostAuthor" name="postAuthor">
-              <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
               <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
 
             </div>
@@ -267,7 +266,6 @@ session_start();
           <div class="modal-footer">
             <form action="functions/deletePost.php" method="POST" enctype="multipart/form-data">     
               <input type="hidden" id="deletePostAuthor" name="deletePostAuthor">
-              <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
               <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
               <button type="submit" class="btn btn-danger">Delete Post</button>
             </form>
@@ -409,7 +407,7 @@ session_start();
       $('#login').modal('show');
     }
   }
-  var currentUser = "<?php echo $_SESSION["nickName"];?>";
+  var currentUser = "<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>";
 
 </script>
 <script src="public/js/serverUrl.js"></script>

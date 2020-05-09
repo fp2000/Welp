@@ -11,8 +11,6 @@ if (isset($_SESSION["status"])){
     echo $_SESSION["status"];
   }
 }
-
-
 ?>
 <head>
     <meta charset="UTF-8">
@@ -51,7 +49,7 @@ if (isset($_SESSION["status"])){
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="profile.php?nickName=<?php echo $_SESSION["nickName"]; ?>">My profile</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="profile.php?nickName=<?php echo $_SESSION["nickName"]; ?>">Settings</a>
+            <a class="dropdown-item" href="accountSettings.php?nickName=<?php echo $_SESSION["nickName"]; ?>">Settings</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" id="btnNavBarLogOut" href="functions/logOut.php">Log Out</a>
             <div class="dropdown-divider"></div>
@@ -66,6 +64,15 @@ if (isset($_SESSION["status"])){
     </div>
   </nav>
 <!--End NavBar-->
+
+<!-- Login Error -->
+  <div class="alert alert-warning alert-dismissible fade show m-2 d-none" role="alert" id="loginError">
+    <span id="loginErrorText"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<!--End Login Error -->
 
   <div class="container">
 
@@ -147,6 +154,7 @@ if (isset($_SESSION["status"])){
 <script>
   var nickName = "<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>";
 </script>
+<script src="public/js/loginError.js"></script>
 <script src="public/js/serverUrl.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -157,6 +165,7 @@ if (isset($_SESSION["status"])){
 <script src="public/js/likeAction.js"></script>
 <script src="public/js/recommendedPosts.js"></script>
 
+
 <script>
   document.getElementById("currentUrl").value=window.location.href;
 </script>
@@ -164,6 +173,11 @@ if (isset($_SESSION["status"])){
   if (isset($_SESSION["nickName"])){
     echo '<script>hideMenus();</script>';
   }
+  if (isset($_GET['loginStatus'])){
+    $error = $_GET['loginStatus'];
+    echo "<script>loginError('$error')</script>";
+  }
 ?>
+
 </html>
 

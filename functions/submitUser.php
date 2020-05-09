@@ -16,7 +16,7 @@ $url = $serverUrl . 'user/';
 echo $url;
 
 $ch = curl_init($url);
-$userId = uniqid(uwu);
+$userId = uniqid('uwu');
 $nickName = $_POST['nickName'];
 $pass =  crypt($_POST['password1'], '$6$');
 $data = array(

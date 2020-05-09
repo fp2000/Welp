@@ -1,13 +1,11 @@
 ### Cosas pendientes
 
-- Modo oscuro
+- Hacer las páginas de cuenta borrada y baneada y terminar la confirmacion
+- A ver que hacer con los likes
+- Hacer los filtros y el ordenar por
+-------------------------------------------------------------------------------
 - hacer la pagina de administracion
 - Hacer la barra de búsqueda
-- Hacer la página de ajustes del usuario
-- Poner los mensajes cuando un nombre de usuario no este disponible
-- Poner los mensajes cuando el inicio de sesión no sea correcto
-- Hacer los filtros y el ordenar por
 - Hacer que sea pwa
 - Poner la opcion de insertar una imagen en un post
-- A ver que hacer con los likes
 

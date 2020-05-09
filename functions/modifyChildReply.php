@@ -1,13 +1,14 @@
 <?php
+session_start();
 require_once('serverUrl.php');
 
 if (isset($_POST['modifyChildReplyText']) && isset($_POST['modifyChildReplyId']) && 
     isset($_POST['modifyChildReplyAuthor']) && isset($_POST['modifyChildReplyChildReplyId']) && 
-    isset($_POST['author']) && isset($_POST['postId']) ) {
+    isset($_POST['postId']) ) {
 } else {
     exit("data validation error"); 
 }
-if ($_POST['author'] != $_POST['modifyChildReplyAuthor']) {
+if ($_SESSION["nickName"] != $_POST['modifyChildReplyAuthor']) {
     exit("user validation error");
 }
 $postId = $_POST['postId'];

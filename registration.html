@@ -72,8 +72,9 @@
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="nickName">Pick an Username (required)</label>
-                            <input type="text" name="nickName" class="form-control" id="nickName" required>
+                                <label for="nickName">Pick an Username (required)</label>
+                                <input type="text" onchange="checkNickName(this.value)" name="nickName" class="form-control" id="nickName" required>
+                                <span id="nickNameError"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -124,6 +125,7 @@
 
     
 </body>
+<script src="public/js/checkNickName.js"></script>
 <script src="public/js/passwordValidator.js"></script>
 <script src="public/js/serverUrl.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

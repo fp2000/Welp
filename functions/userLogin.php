@@ -6,7 +6,8 @@ $url = $serverUrl . 'auth';
 
 $pass =  crypt($_POST['password'], '$6$');
 $nickName = $_POST['nickName'];
-$currentUrl = $_POST['currentUrl'];
+$currentUrl = strtok($_POST['currentUrl'], '?');
+
 $data = array(
     'nickName' => $nickName,
     'password' => $pass,
@@ -46,13 +47,8 @@ if ($userParams->nickName == $nickName){
     $_SESSION["status"]=$userParams->status;
     header('Location: ' . $currentUrl);
     
-} elseif ($res == 'incorrectPassword'){
-    echo ('te equivocaste en la contraseña uwu');    
-} elseif ($res == 'userNotFound'){
-    echo ('no se encontro el usuario uwu');
-} elseif ($res == 'invalidInput'){
-    echo ('kk uwu');
 } else {
-
+    header('Location: ' . $currentUrl . '?loginStatus='.$res);
 }
+
 ?>

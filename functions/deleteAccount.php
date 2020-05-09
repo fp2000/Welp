@@ -1,26 +1,20 @@
 <?php
+
 session_start();
 require_once('serverUrl.php');
 
-if (isset($_POST['deletePostAuthor']) && 
-    isset($_POST['postId'])) {
+if (isset($_POST['nickName'])) {
 } else {
     exit("data validation error"); 
 }
-if ($_SESSION["nickName"] != $_POST['deletePostAuthor']) {
+if ($_POST['nickName'] != $_SESSION["nickName"]) {
     exit("user validation error");
 }
+$nickName = $_SESSION["nickName"];  
+$url = $serverUrl . 'user/delete/' . $nickName;
 
-$postId = $_POST['postId'];
-$url = $serverUrl . 'post/' . $postId;
-
-$content = "";
-if (isset($_POST['modifyPostContent'])){
-    $content = $_POST['modifyPostContent'];
-}
 
 $data = array();
-print_r($data) ;
 
 $ch = curl_init($url);
 $payload = json_encode($data);
@@ -31,4 +25,6 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $result = curl_exec($ch);
 curl_close($ch);
+
+session_destroy();
 header("Location: ../index.php");

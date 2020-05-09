@@ -75,7 +75,7 @@ session_start();
           </div>
           <div class="d-none" id="userModificationButton">
             <div class="d-flex justify-content-center">
-              <a href="accountSettings.php" class="btn btn-success button1">Edit</a>
+              <a href="accountSettings.php?nickName=<?php echo $_SESSION["nickName"]; ?>" class="btn btn-success button1">Edit</a>
             </div> 
           </div>
           

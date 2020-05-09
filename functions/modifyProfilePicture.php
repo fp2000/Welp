@@ -1,9 +1,16 @@
 <?php
-
+session_start();
 require_once('serverUrl.php');
+
 $url = $serverUrl . 'upload';
 
-
+if (isset($_POST['author']) && $_FILES['photo']) {
+} else {
+    exit("data validation error"); 
+}
+if ($_POST['author'] != $_SESSION["nickName"]) {
+    exit("user validation error");
+}
 
 $file = $_FILES['photo']['tmp_name'];
 $cfile = new CURLFile($file,'image/png',$_POST['author']. '.jpg');

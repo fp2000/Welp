@@ -8,7 +8,10 @@ fetch(serverUrl + '/user/'+ nickName).then(function (response) {
     $("#profilePicture").attr("src", serverUrl + `/uploads/${user.nickName}.jpg`);
     $("#profileNickName").text(user.nickName);
     $("#profileName").text(user.firstName);
-    $("#profileLastName").text(user.lastName);
+    $("#profileLastName").text(user.lastName);    
+    $("#profileNameModal").val(user.firstName);
+    $("#profileLastNameModal").val(user.lastName);
+    $(".nickName").val(user.nickName);
     $("#profileRegDate").text(user.regDate);
     $("#userPostsName").text(user.nickName + "'s posts");
 });

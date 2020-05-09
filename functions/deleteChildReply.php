@@ -1,13 +1,14 @@
 <?php
+session_start();
 require_once('serverUrl.php');
 
 if (isset($_POST['deleteChildReplyAuthor']) &&
-    isset($_POST['deleteChildReplyChildReplyId']) && isset($_POST['author']) && 
+    isset($_POST['deleteChildReplyChildReplyId']) && 
     isset($_POST['postId'])) {
 } else {
     exit("data validation error"); 
 }
-if ($_POST['author'] != $_POST['deleteChildReplyAuthor']) {
+if ($_SESSION["nickName"] != $_POST['deleteChildReplyAuthor']) {
     exit("user validation error");
 }
 
