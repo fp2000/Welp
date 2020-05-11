@@ -1,7 +1,5 @@
 ### Cosas pendientes
 
-- Hacer las páginas de cuenta borrada y baneada y terminar la confirmacion
-- A ver que hacer con los likes
 - Hacer los filtros y el ordenar por
 -------------------------------------------------------------------------------
 - hacer la pagina de administracion

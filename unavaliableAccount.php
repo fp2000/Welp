@@ -12,7 +12,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="public/css/accountConfirmationStyle.css">  
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>Please, confirm your account</title>
+    <title>Account <?php echo $_SESSION["status"]?></title>
 </head>
 <body>
     
@@ -21,23 +21,18 @@ session_start();
         <div class="bgWhite">
           <div class="row">
             <div class="col-md-12">
-              <h1>Please, confirm your account</h1>
+              <h1>Your account has been <?php echo $_SESSION["status"]?></h1>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
-              <p>An email have been sent to your email. Activate your account before use it</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <a>Send again the confirmation email</a>
+              <p>Your account is not available right now</p>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <br>
-              <a href="functions/logOut.php">Log out and back to home</a>
+              <a href="functions/logOut.php">Back to home</a>
             </div>
           </div>
           

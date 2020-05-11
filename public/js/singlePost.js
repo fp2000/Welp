@@ -21,7 +21,7 @@ fetch(serverUrl + '/post/'+ postId).then(function (response) {
         document.getElementById('publishDate').innerHTML= postDate;
         document.getElementById('author').innerHTML= `<a href="profile.php?nickName=${post.author}">${post.author}</a>`;
         document.getElementById('text').innerHTML= post.text;
-        document.getElementById('likes').innerHTML= post.likes;
+        document.getElementById('likes').innerHTML= post.likes.length;
         document.getElementById('visits').innerHTML= post.visits;
         document.getElementById('topic').innerHTML= post.topic;
         if (post.content != undefined){

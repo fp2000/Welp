@@ -17,4 +17,4 @@ curl_setopt($ch, CURLOPT_POST, true);
 $result = curl_exec($ch);
 curl_close($ch);
 
-echo $userId;
+header("Location: ../accountActivated.php");

@@ -76,7 +76,7 @@ function addContent(positions) {
                 <div class="indexPostRating">
                   <div class="row">
                     <div class="col-md-3">
-                      <button class="btn btn-success button1" onclick="likeAction('${posts[i].nickName}', '${posts[i].postId}')">${likes}</button>
+                      <button class="btn btn-success button1" id="likeBtn${posts[i].postId}" onclick="likeButton('${posts[i].nickName}', '${posts[i].postId}')">Likes: ${likes}</button>
                     </div>
                     <div class="col-md-3">
                       <a href="">${posts[i].topic}</a>
