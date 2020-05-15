@@ -1,0 +1,20 @@
+{
+    "name": "Welp",
+    "short_name": "welp",
+    "start_url": "index.php",    
+    "display": "fullscreen",
+    "background_color": "#fdfdfd",
+    "theme_color": "#db4938",
+    "orientation": "portrait-primary",
+    "icons": [
+          {
+            "src": "public/icons/196.png",
+            "type": "image/png", "sizes": "196x196"
+          },
+          {
+            "src": "public/icons/512.png",
+            "type": "image/png","sizes": "512x512"
+          }
+    ]
+  }
+  

@@ -2,6 +2,15 @@
 <html lang="en">
 <?php
 session_start();
+if (isset($_SESSION["status"])){
+  if ($_SESSION["status"] == "active") {
+  }
+  else if (($_SESSION["status"] == "pending")){
+    header("Location: accountConfirmation.php");
+  } else {
+    header("Location: unavaliableAccount.php");
+  }
+}
 ?>
 
 <head>
@@ -9,7 +18,6 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="public/css/mainStyle.css">
-  <link rel="stylesheet" type="text/css" href="public/css/toggleSwitch.css">
   <link rel="stylesheet" type="text/css" href="public/css/singlePost.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,17 +26,16 @@ session_start();
 
 <body>
 
-  <!--NavBar-->
-  <nav class="navbar navbar-expand-lg navbar-light customNavBar">
+<!--NavBar-->
+<nav class="navbar navbar-expand-lg navbar-light customNavBar">
     <a class="navbar-brand" id="navBarLogo" href="index.php">WELP!</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-
       <ul class="navbar-nav ml-auto" id="notLoggedOptions">
         <li class="nav-item active">
-          <button type="button" class="btn btn-primary button1" data-toggle="modal" data-target="#login">Log In</button>
+          <button type="button" id="navLogInBtn" class="btn btn-primary button1" data-toggle="modal" data-target="#login">Log In</button>
           <a href="registration.html" class="btn btn-success button1">Sign Up</a>
         </li>
       </ul>
@@ -41,22 +48,29 @@ session_start();
             My account
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="profile.php?nickName=<?php echo $_SESSION["nickName"]; ?>">Control Panel</a>
+            <a class="dropdown-item" href="profile.php?nickName=<?php echo $_SESSION["nickName"]; ?>">My profile</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" id="btnNavBarLogOut" href="functions/logOut.php">Log Out</a>
+            <a class="dropdown-item" href="accountSettings.php?nickName=<?php echo $_SESSION["nickName"]; ?>">Settings</a>
             <div class="dropdown-divider"></div>
-            <span class="dropdown-item">Dark mode</span>
-            <label class="switch">
-              <input type="checkbox" onchange="toggleDarkLight()">
-              <span class="slider round"></span>
-            </label>
+            <form action="functions/logOut.php" method="POST" enctype="multipart/form-data">
+              <input type="hidden" name="currentUrl" class="currentUrl">
+              <button type="submit" class="dropdown-item" id="btnNavBarLogOut">Log Out </button>
+            </form>       
           </div>
         </li>
       </ul>
     </div>
   </nav>
-  <!--End NavBar-->
+<!--End NavBar-->
 
+<!-- Login Error -->
+<div class="alert alert-warning alert-dismissible fade show m-2 d-none" role="alert" id="loginError">
+    <span id="loginErrorText"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<!--End Login Error -->
 
   <div class="container">
 
@@ -80,8 +94,10 @@ session_start();
                     <div id="content"></div>
                   </div>                  
                 </div>
-                <span class="modifyPostButton" id="modifyPostButton"></span>
-                <span class="deletePostButton" id="deletePostButton"></span>
+                <div class="button">
+                  <span class="modifyPostButton" id="modifyPostButton"></span>
+                  <span class="deletePostButton" id="deletePostButton"></span>                  
+                </div>
               </div>              
             </div>
           </div>
@@ -103,7 +119,7 @@ session_start();
             <div class="commentArea mainBorder d-none" id="commentArea">
               <div class="row">
                 <div class="col-md-12">
-                  <h5>Leave a comment</h5>
+                  <h5 class="leaveAComment">Leave a comment</h5>
                 </div>
                 <div class="col-md-12">
                   <form action="./functions/submitReply.php" method="POST">
@@ -112,7 +128,7 @@ session_start();
                     </div>
                     <input type="hidden" id="nickName" name="nickName" value="<?php echo $_SESSION["nickName"]; ?>">
                     <input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["userId"]; ?>">
-                    <input type="hidden" id="postId" name="postId" value="<?php echo $_GET['postId']; ?>">
+                    <input type="hidden" class="postId" name="postId" value="<?php echo $_GET['postId']; ?>">
                     <button id="btnSubmitReply" type="submit" class="btn btn-primary button1" value="OK">Submit your reply</button>
                   </form>
                 </div>
@@ -187,19 +203,15 @@ session_start();
               </button>
             </div>
             <div class="modal-body">
-
                 <form action="functions/userLogin.php" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <input id="modalLogInNickName" class="form-control" type="text" name="nickName" placeholder="Username" required>
                     <br>
                     <input id="modalLogInPassword" class="form-control" type="password" name="password" placeholder="Password" required>
                     <br>
-                    <input type="hidden" id="currentUrl" name="currentUrl" value=CurrentUrl>
-
-                    <button type="submit" id="modalLogInBtn" class="btn btn-primary button1" >Log In</button>
-                    
-                  </div>
-                  
+                    <input type="hidden" name="currentUrl" class="currentUrl">
+                    <button type="submit" id="modalLogInBtn" class="btn btn-primary button1" >Log In</button>                    
+                  </div>                  
                 </form>
             </div>
             <div class="modal-footer d-flex justify-content-center modalBottom">
@@ -241,7 +253,7 @@ session_start();
               <div class="row" id="modifyPostContentModal"></div>
 
               <input type="hidden" id="modifyPostAuthor" name="postAuthor">
-              <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+              <input type="hidden" class="postId" name="postId" value="<?php echo $_GET["postId"];?>">
 
             </div>
             <div class="modal-footer">
@@ -266,7 +278,7 @@ session_start();
           <div class="modal-footer">
             <form action="functions/deletePost.php" method="POST" enctype="multipart/form-data">     
               <input type="hidden" id="deletePostAuthor" name="deletePostAuthor">
-              <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+              <input type="hidden" class="postId" name="postId" value="<?php echo $_GET["postId"];?>">
               <button type="submit" class="btn btn-danger">Delete Post</button>
             </form>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -294,8 +306,8 @@ session_start();
           </div>
           <input type="hidden" id="modifyReplyId" name="modifyReplyId">
           <input type="hidden" id="modifyReplyAuthor" name="modifyReplyAuthor">
-          <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
-          <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+          <input type="hidden" class="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
+          <input type="hidden" class="postId" name="postId" value="<?php echo $_GET["postId"];?>">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -321,8 +333,8 @@ session_start();
 
             <input type="hidden" id="deleteReplyId" name="deleteReplyId">
             <input type="hidden" id="deleteReplyAuthor" name="deleteReplyAuthor">
-            <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
-            <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+            <input type="hidden" class="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
+            <input type="hidden" class="postId" name="postId" value="<?php echo $_GET["postId"];?>">
 
             <button type="submit" class="btn btn-danger">Delete Reply</button>
           </form>
@@ -353,8 +365,8 @@ session_start();
           <input type="hidden" id="modifyChildReplyId" name="modifyChildReplyId">
           <input type="hidden" id="modifyChildReplyAuthor" name="modifyChildReplyAuthor">
           <input type="hidden" id="modifyChildReplyChildReplyId" name="modifyChildReplyChildReplyId">
-          <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
-          <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+          <input type="hidden" class="author" name="author" value="<?php echo $_SESSION["nickName"];?>">
+          <input type="hidden" class="postId" name="postId" value="<?php echo $_GET["postId"];?>">
 
         </div>
         <div class="modal-footer">
@@ -382,8 +394,8 @@ session_start();
           <input type="hidden" id="deleteChildReplyId" name="deleteChildReplyId">
           <input type="hidden" id="deleteChildReplyAuthor" name="deleteChildReplyAuthor">
           <input type="hidden" id="deleteChildReplyChildReplyId" name="deleteChildReplyChildReplyId">
-          <input type="hidden" id="author" name="author" value="<?php echo $_SESSION["nickName"];?>">          
-          <input type="hidden" id="postId" name="postId" value="<?php echo $_GET["postId"];?>">
+          <input type="hidden" class="author" name="author" value="<?php echo $_SESSION["nickName"];?>">          
+          <input type="hidden" class="postId" name="postId" value="<?php echo $_GET["postId"];?>">
 
             <button type="submit" class="btn btn-danger">Delete Reply</button>
           </form>
@@ -392,14 +404,21 @@ session_start();
       </div>
     </div>
   </div>
-<!-- End Delete ChildReply confirmation -->
+<!-- End Delete ChildReply confirmation --> 
 
 
 
 
 
 </body>
-<script>
+<script>  
+  var tObj = document.getElementsByClassName('currentUrl');
+  for(var i = 0; i < tObj.length; i++){
+      tObj[i].value= window.location.href;
+  }
+
+  var currentUser = "<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>";
+
   function replyAction(replyId) {
     if (<?php echo isset($_SESSION["nickName"]) ? "true" : "false";?>){
       showReplyBox(replyId);
@@ -407,7 +426,6 @@ session_start();
       $('#login').modal('show');
     }
   }
-  var currentUser = "<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>";
 
 </script>
 <script src="public/js/serverUrl.js"></script>
@@ -415,15 +433,11 @@ session_start();
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="public/js/singlePost.js"></script>
-<script src="public/js/darkMode.js"></script>
+<script src="public/js/loginError.js"></script>
 <script src="public/js/recommendedPosts.js"></script>
 <script src="public/js/changeMenu.js"></script>
 
 <script>
-  //document.getElementById("currentUrl").value = window.location.href;
-
-
-
   function showReplyBox(replyId) {
     text = `
           <div class="row" id="rb${replyId}">
@@ -437,7 +451,7 @@ session_start();
                 
                 <input type="hidden" id="nickName" name="nickName" value="<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>">
                 <input type="hidden" id="userId" name="userId" value="<?php echo isset($_SESSION['userId']) ? $_SESSION['userId'] : "undefined" ?>">
-                <input type="hidden" id="postId" name="postId" value="<?php echo $_GET['postId']; ?>">
+                <input type="hidden" class="postId" name="postId" value="<?php echo $_GET['postId']; ?>">
                 <input type="hidden" name="replyId" value="${replyId}">
                 <button type="submit" id="sbmt${replyId}" class="btn btn-primary button1" value="OK">Submit your reply</button>
               </form>
@@ -456,13 +470,18 @@ session_start();
       showReplyBox(replyId);
     };
   }
+
 </script>
 
 </html>
 
 <?php
-if (isset($_SESSION["nickName"])) {
-  echo '<script>hideMenus();</script>';
-  echo '<script>showCommentBoxSinglePost();</script>';
-}
+  if (isset($_SESSION["nickName"])){
+    echo '<script>hideMenus();</script>';
+    echo '<script>showCommentBoxSinglePost();</script>';
+  }
+  if (isset($_GET['loginStatus'])){
+    $error = $_GET['loginStatus'];
+    echo "<script>loginError('$error')</script>";
+  }
 ?>

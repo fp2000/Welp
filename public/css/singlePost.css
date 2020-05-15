@@ -28,6 +28,8 @@ a:hover {
     padding-left: 2%;
     padding-right: 2%;
     border-radius: 5px;
+    word-wrap: break-word;
+    width: 100%;
 }
 .singlePostTitleLink{
     text-decoration: none;
@@ -51,6 +53,8 @@ a:hover {
     padding-right: 2%;
     border-radius: 5px;
     background-color:rgba(255, 255, 255, 0.931);
+    word-wrap: break-word;
+    width: 100%;
 }
 .singlePostMedia{
     text-align: center;
@@ -67,13 +71,19 @@ a:hover {
     padding-left: 1em;
     padding-right: 1em;
 }
+.leaveAComment {
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
 .commentArea {
     background-color:rgba(255, 255, 255, 0.931);
     margin: 10px;
-    padding-top: 0.1em;
-    padding-bottom: 0.5em;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
     padding-left: 2%;
     padding-right: 2%;
 }
 
-
+.button {
+    padding: 0.5em;
+}

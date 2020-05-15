@@ -6,7 +6,12 @@ $url = $serverUrl . 'auth';
 
 $pass =  crypt($_POST['password'], '$6$');
 $nickName = $_POST['nickName'];
-$currentUrl = strtok($_POST['currentUrl'], '?');
+//$currentUrl = strtok($_POST['currentUrl'], 'loginStatus');
+$currentUrl = $_POST['currentUrl'] . '?';
+$key = 'loginStatus';
+$filteredURL = preg_replace('~(\?|&)'.$key.'=[^&]*~', '$1', $currentUrl);
+echo $filteredURL;
+
 
 $data = array(
     'nickName' => $nickName,
@@ -45,10 +50,10 @@ if ($userParams->nickName == $nickName){
     $_SESSION["userId"]=$userParams->userId;
     $_SESSION["userId"]=$userParams->userId;
     $_SESSION["status"]=$userParams->status;
-    header('Location: ' . $currentUrl);
+    header('Location: ' . $filteredURL);
     
 } else {
-    header('Location: ' . $currentUrl . '?loginStatus='.$res);
+    header('Location: ' . $filteredURL . '&loginStatus='.$res);
 }
 
 ?>

@@ -15,7 +15,7 @@ var modifyContentModal = `
 fetch(serverUrl + '/post/'+ postId).then(function (response) {
         return response.json();        
     }).then (function(post){
-        document.title = post.title;
+        document.title = 'Welp: ' + post.title;
         var postDate = new Date(post.creationDate).toLocaleString();
         document.getElementById('singlePostTitle').innerHTML= post.title;
         document.getElementById('publishDate').innerHTML= postDate;
@@ -86,12 +86,12 @@ fetch(serverUrl + '/replys/postId/'+ postId).then(function (response) {
                                 <div class="col-md-7">                                    
                                 </div>
                                 <div class="col-md-2 replyButton">
-                                    <button type="button" class="btn btn-success button1" data-toggle="modal" data-target="#modifyReplyModal" onclick="fillModifyReplyFormulary('${replys[i].replyId}', '${replys[i].text}', '${replys[i].nickName}')">
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#modifyReplyModal" onclick="fillModifyReplyFormulary('${replys[i].replyId}', '${replys[i].text}', '${replys[i].nickName}')">
                                         <i class="material-icons">edit</i></i>
                                     </button>
                                 </div>
                                 <div class="col-md-2 replyButton">
-                                    <button type="button" class="btn btn-success button1" data-toggle="modal" data-target="#deleteReplyConfirmation" onclick="fillDeleteReplyConfirmation('${replys[i].replyId}', '${replys[i].nickName}')" >
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#deleteReplyConfirmation" onclick="fillDeleteReplyConfirmation('${replys[i].replyId}', '${replys[i].nickName}')" >
                                         <i class="material-icons">delete</i></i>
                                     </button>
                                 </div>
@@ -108,35 +108,33 @@ fetch(serverUrl + '/replys/postId/'+ postId).then(function (response) {
                     var date = new Date(replys[i].replys[j].date).toLocaleString();
                     text+= `
                         <div class="replyReply mt-1">
+                        
                             <div class="row">
                                 <div class="col-md-1"></div>
-                                <div class="col-md-7">
-                                    <div class="row">
-                                        <div class="col-md-12"> Author: ${replys[i].replys[j].nickName} Date: ${date} </div>
+                                <div class="col-md-10">
+                                    <hr>       
+                                    <div class="row">                                        
+                                        <div class="col-md-9"> Author: ${replys[i].replys[j].nickName} Date: ${date} </div>
+                                        `
+                            if (currentUser === replys[i].replys[j].nickName) {
+                                text+= `
+                                        <div class="col-md-1 replyButton">
+                                            <button type="button" class="btn" data-toggle="modal" data-target="#modifyChildReplyModal" onclick="fillModifyChildReplyFormulary('${replys[i].replyId}', '${replys[i].replys[j].text}', '${replys[i].replys[j].nickName}', '${replys[i].replys[j].childReplyId}')">
+                                                <i class="material-icons">edit</i></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-1 replyButton">
+                                            <button type="button" class="btn" data-toggle="modal" data-target="#deleteChildReplyConfirmation" onclick="fillDeleteChildReplyConfirmation('${replys[i].replyId}', '${replys[i].replys[j].nickName}', '${replys[i].replys[j].childReplyId}')" >
+                                                <i class="material-icons">delete</i></i>
+                                            </button>
+                                        </div>`
+                            }
+                            text += `
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12"> ${replys[i].replys[j].text} </div>
                                     </div>
-                                </div>`
-                                if (currentUser === replys[i].replys[j].nickName) {
-                                    text+= `
-                                            <div class="col-md-4">
-                                                <div class="row">
-                                                    <div class="col-md-4"></div>
-                                                    <div class="col-md-3 replyButton">
-                                                        <button type="button" class="btn btn-success button1" data-toggle="modal" data-target="#modifyChildReplyModal" onclick="fillModifyChildReplyFormulary('${replys[i].replyId}', '${replys[i].replys[j].text}', '${replys[i].replys[j].nickName}', '${replys[i].replys[j].childReplyId}')">
-                                                            <i class="material-icons">edit</i></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-3 replyButton">
-                                                        <button type="button" class="btn btn-success button1" data-toggle="modal" data-target="#deleteChildReplyConfirmation" onclick="fillDeleteChildReplyConfirmation('${replys[i].replyId}', '${replys[i].replys[j].nickName}', '${replys[i].replys[j].childReplyId}')" >
-                                                            <i class="material-icons">delete</i></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>`
-                                }
-                                text += `
+                                </div>
                             </div>
                         </div>
                         `;

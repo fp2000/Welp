@@ -1,3 +1,3 @@
 <?php
 
-$serverUrl = 'http://localhost:3000/';
+$serverUrl = 'https://welp-api.herokuapp.com/' . '/';

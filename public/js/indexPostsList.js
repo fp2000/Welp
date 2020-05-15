@@ -45,6 +45,7 @@ function addContent(positions) {
       }
       text = "";
       for (i = 0; i < posts.length; i++) {
+          var date = new Date(posts[i].creationDate).toLocaleString();
           let postId = posts[i].postId;
           let likes = posts[i].likes.length;
 
@@ -53,16 +54,16 @@ function addContent(positions) {
                 <a id="${postId}" class="indexPostTitleLink" href="singlePost.php?postId=${postId}"><h4 class="indexPostTitle">${posts[i].title}</h4></a>
                 <div class="indexPostDetails">
                   <div class="row">
-                    <div class="col">
+                    <div class="col-md-6">
                       Author: <a href="profile.php?nickName=${posts[i].author}">${posts[i].author}</a>
                     </div>
-                    <div class="col">
-                      Publication Date:${posts[i].creationDate}
+                    <div class="col-md-6">
+                      Publication Date: ${date}
                     </div>
                   </div>
                 </div>
                 <div class="indexPostText">
-                    <a href="singlePost.php?postId=${postId}"><p>${posts[i].text}</p></a>
+                    <a href="singlePost.php?postId=${postId}">${posts[i].text}</a>
                 </div>`
                 if (posts[i].content != undefined) {
                   text+= `

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <?php
 session_start();
 if (isset($_SESSION["status"])){
@@ -15,14 +16,23 @@ if (isset($_SESSION["status"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="manifest" href="manifest.json" />  
+    <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+    <meta name="theme-color" content="#db4938" />
+
+    <link rel="apple-touch-icon" href="public/icons/196.png" />
+    <link rel="apple-touch-icon" href="public/icons/512.png" />
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link id="link" rel="stylesheet" type="text/css" href="public/css/mainStyle.css">
-    <link id="link" rel="stylesheet" type="text/css" href="public/css/toggleSwitch.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <title>Welp: Inicio</title>
+    <link id="link" rel="stylesheet" type="text/css" href="public/css/mainStyle.css">
+
+    <title>Welp: Home</title>
 </head>
 
-<body class="light-mode" id="body">
+<body>
+<main>
 
 <!--NavBar-->
   <nav class="navbar navbar-expand-lg navbar-light customNavBar">
@@ -31,7 +41,6 @@ if (isset($_SESSION["status"])){
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-
       <ul class="navbar-nav ml-auto" id="notLoggedOptions">
         <li class="nav-item active">
           <button type="button" id="navLogInBtn" class="btn btn-primary button1" data-toggle="modal" data-target="#login">Log In</button>
@@ -51,13 +60,10 @@ if (isset($_SESSION["status"])){
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="accountSettings.php?nickName=<?php echo $_SESSION["nickName"]; ?>">Settings</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" id="btnNavBarLogOut" href="functions/logOut.php">Log Out</a>
-            <div class="dropdown-divider"></div>
-            <span class="dropdown-item">Dark mode</span>
-            <label class="switch">            
-              <input type="checkbox" onchange="toggleDarkLight()">
-              <span class="slider round"></span>
-            </label>
+            <form action="functions/logOut.php" method="POST" enctype="multipart/form-data">
+              <input type="hidden" name="currentUrl" class="currentUrl">
+              <button type="submit" class="dropdown-item" id="btnNavBarLogOut">Log Out </button>
+            </form>       
           </div>
         </li>
       </ul>
@@ -104,7 +110,7 @@ if (isset($_SESSION["status"])){
 
 <!-- Recommended posts area --> 
       <div class="col-md-4 recommendedPosts mainBorder">
-        <h5 class="">Recommended Posts</h5>
+        <h4 class="">Recommended Posts</h4>
         <div id="recommendedPostsPlaceHolder"></div>
       </div>
 <!-- End Recommended posts area --> 
@@ -124,19 +130,15 @@ if (isset($_SESSION["status"])){
               </button>
             </div>
             <div class="modal-body">
-
                 <form action="functions/userLogin.php" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <input id="modalLogInNickName" class="form-control" type="text" name="nickName" placeholder="Username" required>
                     <br>
                     <input id="modalLogInPassword" class="form-control" type="password" name="password" placeholder="Password" required>
                     <br>
-                    <input type="hidden" id="currentUrl" name="currentUrl" value=CurrentUrl>
-
-                    <button type="submit" id="modalLogInBtn" class="btn btn-primary button1" >Log In</button>
-                    
-                  </div>
-                  
+                    <input type="hidden" name="currentUrl" class="currentUrl">
+                    <button type="submit" id="modalLogInBtn" class="btn btn-primary button1" >Log In</button>                    
+                  </div>                  
                 </form>
             </div>
             <div class="modal-footer d-flex justify-content-center modalBottom">
@@ -146,24 +148,15 @@ if (isset($_SESSION["status"])){
         </div>
     </div>
 <!--End Login Modal-->
-
+</main>
 </body>
 <script>
+  var tObj = document.getElementsByClassName('currentUrl');
+  for(var i = 0; i < tObj.length; i++){
+      tObj[i].value= window.location.href;
+  }
+
   var nickName = "<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>";
-</script>
-<script src="public/js/loginError.js"></script>
-<script src="public/js/serverUrl.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="public/js/indexPostsList.js"></script>
-<script src="public/js/changeMenu.js"></script>
-<script src="public/js/likeAction.js"></script>
-<script src="public/js/recommendedPosts.js"></script>
-
-
-<script>
-  document.getElementById("currentUrl").value=window.location.href;
 
   function likeButton(nickName, postId) {
     if (<?php echo isset($_SESSION['nickName']) ? "true" : "false" ?>) {
@@ -173,6 +166,18 @@ if (isset($_SESSION["status"])){
     }
   }
 </script>
+<script src="public/js/serverUrl.js"></script>
+<script src="public/js/loginError.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="public/js/indexPostsList.js"></script>
+<script src="public/js/changeMenu.js"></script>
+<script src="public/js/likeAction.js"></script>
+<script src="public/js/recommendedPosts.js"></script>
+<script src="app.js"></script>
+
+
 <?php
   if (isset($_SESSION["nickName"])){
     echo '<script>hideMenus();</script>';

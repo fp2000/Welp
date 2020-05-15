@@ -1,17 +1,7 @@
 body {
     font-family: 'Montserrat', sans-serif;
-}
-body.dark-mode {
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-}
-  
-body.light-mode {
     background-color: rgb(212, 216, 221);
-    color: rgb(0, 0, 0);
-
 }
-
 
 .customNavBar {
     background-color: #B0B7C0;
@@ -35,19 +25,25 @@ a:hover {
 }
 
 .lightGray {
-    background-color: #C7C8CB;
+    background-color: rgb(241, 241, 241);
 }
 .gray {
-    background-color: rgba(219, 219, 219, 0.883);
+    background-color: rgb(241, 241, 241);
+}
+
+.white {
+    background-color: rgb(255, 255, 255);
 }
 
 .indexPostTitle {
-    background-color:rgb(173, 182, 187);
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
+    background-color:rgba(228, 228, 228, 0.849);
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     padding-left: 2%;
     padding-right: 2%;
     border-radius: 5px;
+    word-wrap: break-word;
+    width: 100%;
 }
 .indexPostTitleLink{
     text-decoration: none;
@@ -55,23 +51,25 @@ a:hover {
 }
 .indexPostTitleLink:hover{
     text-decoration: none;
-    color: rgb(117, 135, 136);
+    color: rgb(203, 210, 211);
 }
 
 .indexPostDetails {
-    padding-top: 0.1em;
-    padding-bottom: 0.5em;
+    padding-top: 0.3em;
+    padding-bottom: 0.7em;
     padding-left: 2%;
     padding-right: 2%;
 }
 .indexPostText {
-    background-color:rgb(173, 182, 187);
-    padding-top: 0.6em;
-    padding-bottom: 0.2em;
+    background-color:rgba(228, 228, 228, 0.849);
+    padding-top: 1em;
+    padding-bottom: 1em;
     padding-left: 2%;
     padding-right: 2%;
     border-radius: 5px;
-    color: black;    
+    color: black;
+    word-wrap: break-word;
+    width: 100%;
 }
 .indexPostMedia{
     text-align: center;
@@ -81,7 +79,7 @@ a:hover {
     display: inline-block;
 }
 .indexPostRating {
-    padding-top: 0.1em;
+    padding-top: 1em;
     padding-bottom: 0.5em;
     padding-left: 2%;
     padding-right: 2%;
@@ -116,7 +114,7 @@ a:hover {
 
 .recommendedPosts {
     background-color:rgba(255, 255, 255, 0.931);    
-    padding-top: 0.5em;
+    padding-top: 1.4em;
     padding-bottom: 0.5em;
     padding-left: 1em;
     padding-right: 1em;
@@ -124,4 +122,13 @@ a:hover {
 
 #error {
     color: red;
+}
+
+.error {
+    color: red;
+}
+
+.recommendedPostsTitle {
+    word-wrap: break-word;
+    width: 100%;
 }
