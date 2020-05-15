@@ -1,1 +1,1 @@
-const serverUrl = 'https://welp-api.herokuapp.com/';
+const serverUrl = 'https://welp-api.herokuapp.com';
