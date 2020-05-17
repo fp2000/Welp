@@ -11,6 +11,7 @@ if (!isset($_SESSION["nickName"]) && !isset($_SESSION["userId"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link id="link" rel="stylesheet" type="text/css" href="public/css/mainStyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>Create Post</title>
 </head>
 <body>
@@ -36,7 +37,6 @@ if (!isset($_SESSION["nickName"]) && !isset($_SESSION["userId"])){
             <a class="dropdown-item" href="accountSettings.php?nickName=<?php echo $_SESSION["nickName"]; ?>">Settings</a>
             <div class="dropdown-divider"></div>
             <form action="functions/logOut.php" method="POST" enctype="multipart/form-data">
-              <input type="hidden" name="currentUrl" class="currentUrl">
               <button type="submit" class="dropdown-item" id="btnNavBarLogOut">Log Out </button>
             </form>       
           </div>
@@ -99,7 +99,7 @@ if (!isset($_SESSION["nickName"]) && !isset($_SESSION["userId"])){
 <!--End Post Formulary div-->
 
 <!--Recommended Posts Area-->
-    <div class="col-md-3">
+    <div class="col-md-5">
       <div class="recommendedPosts mainBorder">
         <h5 class="pt-1">Recommended Posts</h5>
         <div id="recommendedPostsPlaceHolder">

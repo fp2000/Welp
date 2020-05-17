@@ -11,13 +11,21 @@ if (isset($_SESSION["status"])){
     echo $_SESSION["status"];
   }
 }
+
+if (isset($_SESSION["nickName"])){
+  if ($_SESSION["nickName"] != $_GET['nickName']) {
+    header("Location: index.php");
+  }
+}
+else {
+  header("Location: index.php");
+}
 ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link id="link" rel="stylesheet" type="text/css" href="public/css/mainStyle.css">
-    <link id="link" rel="stylesheet" type="text/css" href="public/css/toggleSwitch.css">
     <link id="link" rel="stylesheet" type="text/css" href="public/css/profileStyle.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title><?php echo $_SESSION["nickName"]; ?> Account Settings</title>
@@ -33,14 +41,7 @@ if (isset($_SESSION["status"])){
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-
-      <ul class="navbar-nav ml-auto" id="notLoggedOptions">
-        <li class="nav-item active">
-          <button type="button" id="navLogInBtn" class="btn btn-primary button1" data-toggle="modal" data-target="#login">Log In</button>
-          <a href="registration.html" class="btn btn-success button1">Sign Up</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto d-none" id="userOptions">
+      <ul class="navbar-nav ml-auto" id="userOptions">
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Welcome back <span class="firstName"><?php echo $_SESSION["firstName"]; ?></span></a>
         </li>
@@ -51,15 +52,11 @@ if (isset($_SESSION["status"])){
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="profile.php?nickName=<?php echo $_SESSION["nickName"]; ?>">My profile</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="profile.php?nickName=<?php echo $_SESSION["nickName"]; ?>">Settings</a>
+            <a class="dropdown-item" href="accountSettings.php?nickName=<?php echo $_SESSION["nickName"]; ?>">Settings</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" id="btnNavBarLogOut" href="functions/logOut.php">Log Out</a>
-            <div class="dropdown-divider"></div>
-            <span class="dropdown-item">Dark mode</span>
-            <label class="switch">            
-              <input type="checkbox" onchange="toggleDarkLight()">
-              <span class="slider round"></span>
-            </label>
+            <form action="functions/logOut.php" method="POST" enctype="multipart/form-data">
+              <button type="submit" class="dropdown-item" id="btnNavBarLogOut">Log Out </button>
+            </form>       
           </div>
         </li>
       </ul>
@@ -68,14 +65,7 @@ if (isset($_SESSION["status"])){
 <!--End NavBar-->
 
 
-<!-- Login Error -->
-  <div class="alert alert-warning alert-dismissible fade show m-2 d-none" role="alert" id="loginError">
-    <span id="loginErrorText"></span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-<!--End Login Error -->
+
 
   <div class="container">
 
@@ -87,10 +77,10 @@ if (isset($_SESSION["status"])){
             <p>First Name: <span id="profileName"></span></p>
             <p>Last Name: <span id="profileLastName"></span></p>
             <button class="btn btn-primary button1 m-1" data-toggle="modal" data-target="#modifyPersonalDataModal" >Modify personal data</button>
-            <h4>Password</h4>
+            <h4 class="mt-4 mb-3">Password</h4>
             <button class="btn btn-primary button1 m-1" data-toggle="modal" data-target="#modifyPasswordModal">Modify your password</button>
             
-            <button type="button" class="btn btn-danger m-1" data-toggle="modal" data-target="#deleteAccountModal">Delete account</button>
+            <button type="button" class="btn btn-danger m-1 mt-4" data-toggle="modal" data-target="#deleteAccountModal">Delete account</button>
             
           </div>
           <div class="col-md-6">
@@ -136,9 +126,9 @@ if (isset($_SESSION["status"])){
             <div class="col-md-8"><input type="text" class="form-control" id="profileLastNameModal" name="profileLastNameModal"></div>
           </div>
         </div>
-        <input type="hidden" id="nickName" name="nickName" value="" class="nickName">
-        <input type="hidden" id="currentUrl" name="currentUrl" value="" class="currentUrl">
-        <input type="hidden" id="currentUser" name="currentUser" value="<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>">
+        <input type="hidden" name="nickName" value="" class="nickName">
+        <input type="hidden" name="currentUrl" class="currentUrl">
+        <input type="hidden" name="currentUser" value="<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>">
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Save changes</button>
@@ -170,8 +160,8 @@ if (isset($_SESSION["status"])){
                   </div>
               </div>                        
           </div>
-        <input type="hidden" id="nickName" name="nickName" value="" class="nickName">
-        <input type="hidden" id="currentUser" name="currentUser" value="<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>">
+        <input type="hidden" name="nickName" value="" class="nickName">
+        <input type="hidden" name="currentUser" value="<?php echo isset($_SESSION['nickName']) ? $_SESSION['nickName'] : "undefined" ?>">
           <div class="row">
               <div class="col-md-12">
                   <div class="form-group">
@@ -209,7 +199,7 @@ if (isset($_SESSION["status"])){
           <p>Select your new profile picture here</p>
           <input type="file" id="photo" name="photo" accept="image/png, image/jpeg">
         </div>
-        <input type="hidden" id="currentUrl" name="currentUrl" value="" class="currentUrl">
+        <input type="hidden" name="currentUrl" class="currentUrl">
         <input type="hidden" id="author" name="author" value="" class="nickName">
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -237,7 +227,7 @@ if (isset($_SESSION["status"])){
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <form action="functions/deleteAccount.php" method="POST" enctype="multipart/form-data">
-          <input type="hidden" id="nickName"  name="nickName" value="" class="nickName">
+          <input type="hidden" name="nickName" value="" class="nickName">
           <button type="submit" class="btn btn-danger m-1">Delete account</button>
         </form>
       </div>
@@ -263,9 +253,13 @@ if (isset($_SESSION["status"])){
 
 
 <script>
-  
-  $(".currentUrl").val(window.location.href);
-  //document.getElementById("currentUrl").value=window.location.href;
+
+var tObj = document.getElementsByClassName('currentUrl');
+for(var i = 0; i < tObj.length; i++){
+    tObj[i].value= window.location.href;
+}
+
+
 </script>
 <?php
   if (isset($_SESSION["nickName"])){

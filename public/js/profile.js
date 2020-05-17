@@ -5,6 +5,7 @@ const nickName = urlParams.get('nickName');
 fetch(serverUrl + '/user/'+ nickName).then(function (response) {
     return response.json();        
 }).then (function(user){
+    document.title = 'Welp: ' + user.nickName + ' profile';
     $("#profilePicture").attr("src", serverUrl + `/uploads/${user.nickName}.jpg`);
     $("#profileNickName").text(user.nickName);
     $("#profileName").text(user.firstName);
@@ -23,14 +24,20 @@ fetch(serverUrl + '/posts/author/' + nickName).then(function (response) {
     var text = "";
     for (i = 0; i < posts.length; i++) {
         text += `
-            <div class="singleRecommendedPost">
+            <div>
                 <div class="row">
-                    <div class="col-md-12"><a href="singlePost.php?postId=${posts[i].postId}"><h5>${posts[i].title}</h5></a></div>
+                    <div class="col-md-12">
+                        <hr>
+                        <a class="recommendedPostsTitle" href="singlePost.php?postId=${posts[i].postId}"><h5>${posts[i].title}</h5></a>                    
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12"><h5>${posts[i].visits} visits</h5></div>
+                    <div class="col-md-12 text-right">
+                        <h6>${posts[i].visits} visits</h6>                
+                    </div>
                 </div>
-            </div>`;
+            </div>
+        `;
     };
     document.getElementById('postsPlaceHolder').innerHTML = text;
 });

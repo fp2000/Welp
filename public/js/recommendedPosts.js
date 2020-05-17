@@ -17,7 +17,7 @@ fetch(serverUrl + '/posts/recommended/').then(function (response) {
                         <h6>${posts[i].visits} visits</h6>                
                     </div>
                 </div>
-            </div>            
+            </div>
         `;
 
     }

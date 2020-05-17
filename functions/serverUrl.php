@@ -1,3 +1,3 @@
 <?php
 
-$serverUrl = 'https://welp-api.herokuapp.com' . '/';
+$serverUrl = 'https://welp-api.herokuapp.com/';
